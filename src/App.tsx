@@ -1,48 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Clock, Route, Search, AlertCircle, CheckCircle } from 'lucide-react';
 
-/*
-PURPOSE: React frontend interface interactive web interface for the Transport Routing API
-**Key Components**:
-```tsx
-const [routes, setRoutes] = useState<Route[]>([]);
-const [loading, setLoading] = useState(false);
-
-const searchRoutes = async () => {
-    // API call with error handling
-    const mockResponse: RouteResponse = { /* demo data */ };
-    setRoutes(mockResponse.routes);
-};
-
-return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        {/* Search form and results display */}
-    </div>
-);
-
-
-
-KEY COMPONENTS:
-- Interactive search form with validation
-- Route results display with transport mode visualization
-- Professional design with Tailwind CSS styling
-- Mock data for development/demo purposes
-- Responsive design for all screen sizes
-
-CODE STRUCTURE:
-1. TypeScript interfaces for type safety
-2. React hooks for state management
-3. Form handling with validation
-4. Results display with transport mode icons
-5. Utility functions for data formatting
-
-WHY USED:
-- User-friendly interface for API testing
-- Demonstrates API capabilities visually
-- Professional design showcases the solution
-- Mock data enables development without backend
-- Responsive design works on all devices
-*/
 
 interface RouteLeg {
   mode: string;
