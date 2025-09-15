@@ -1,5 +1,25 @@
 """
 Integration tests for the Transport Routing API
+End-to-End Testing
+
+**Purpose**: Tests complete workflows and system integration
+**Key Components**:
+```python
+class TestDigitransitIntegration:
+    @pytest.mark.asyncio
+    async def test_mock_digitransit_workflow(self):
+        # Tests complete API workflow with mocked responses
+        
+class TestAPIIntegration:
+    def test_full_api_workflow(self):
+        # End-to-end API testing with TestClient
+        
+class TestPerformance:
+    @pytest.mark.asyncio
+    async def test_concurrent_requests(self):
+        # Performance testing with concurrent requests
+```
+
 
 PURPOSE: Tests complete workflows and system integration with realistic scenarios
 

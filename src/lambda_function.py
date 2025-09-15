@@ -3,6 +3,13 @@ AWS Lambda handler for Transport Routing REST API
 
 PURPOSE: Main FastAPI application that serves as the AWS Lambda entry point
 
+#**Key Components**:
+
+# FastAPI app with CORS middleware
+
+#app = FastAPI(title="Transport Routing API", version="1.0.0")
+#app.add_middleware(CORSMiddleware, allow_origins=["*"])
+
 KEY COMPONENTS:
 - FastAPI app with CORS middleware for cross-origin requests
 - AWS PowerTools integration for observability (logging, tracing, metrics)

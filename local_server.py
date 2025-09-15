@@ -5,6 +5,18 @@ Handles environments where certain modules may not be available.
 
 PURPOSE: Runs the FastAPI application locally for development and testing
 
+**Key Components**:
+```python
+def run_server():
+    try:
+        import uvicorn
+        from lambda_function import app
+        uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
+    except ImportError:
+        # Handle missing dependencies gracefully
+```
+
+
 KEY COMPONENTS:
 - Uvicorn server configuration for local development
 - Import error handling for missing dependencies

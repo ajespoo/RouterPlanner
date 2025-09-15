@@ -1,3 +1,22 @@
+"""
+### `cdk.json` - CDK Configuration
+**Purpose**: CDK project configuration and feature flags
+**Key Components**:
+```json
+{
+  "app": "python app.py",
+  "context": {
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/core:checkSecretUsage": true
+  }
+}
+```
+**Why Used**:
+- Enables CDK feature flags for latest capabilities
+- Defines the application entry point
+- Watch configuration for development
+
+"""
 {
   "_comment": "CDK Configuration File - Defines CDK project settings and feature flags",
   "_purpose": "Configures CDK behavior, enables latest features, and defines build/watch settings",

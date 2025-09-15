@@ -1,5 +1,43 @@
 """
-Tests for data models
+Tests for data models testing
+**Purpose**: Focused testing of Pydantic models and validation
+**Key Components**:
+```python
+def test_route_query_valid():
+    # Tests valid model creation
+    
+def test_route_query_invalid_time():
+    # Tests validation error handling
+    
+def test_route_leg_with_alias():
+    # Tests field aliases and JSON serialization
+
+**Why Used**:
+- Ensures data validation works correctly
+- Tests edge cases and error conditions
+- Validates JSON serialization/deserialization
+
+### `run_tests.py` - Test Runner
+**Purpose**: Handles test execution in various environments
+**Key Components**:
+```python
+def run_tests_direct():
+    # Direct pytest execution for WebContainer environments
+    
+def run_tests_subprocess():
+    # Subprocess execution for full environments
+    
+def main():
+    # Fallback mechanism for different environments
+```
+**Why Used**:
+- Handles environment limitations (WebContainer)
+- Provides fallback mechanisms
+- Consistent test execution across platforms
+
+
+```
+
 """
 import pytest
 from datetime import datetime

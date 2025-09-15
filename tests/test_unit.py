@@ -3,6 +3,23 @@ Comprehensive unit tests for Transport Routing API components
 
 PURPOSE: Tests individual components in isolation with mocked dependencies
 
+**Purpose**: Tests individual components in isolation
+**Key Components**:
+```python
+class TestModelsUnit:
+    def test_route_query_validation_errors(self):
+        # Tests Pydantic model validation
+        
+class TestDigitransitClientUnit:
+    @pytest.mark.asyncio
+    async def test_execute_query_success(self, client):
+        # Tests GraphQL query execution with mocks
+        
+class TestLambdaFunctionUnit:
+    def test_lambda_handler_with_mock_event(self):
+        # Tests Lambda handler with API 
+
+
 KEY COMPONENTS:
 - TestModelsUnit: Pydantic model validation and serialization tests
 - TestDigitransitClientUnit: GraphQL client functionality tests

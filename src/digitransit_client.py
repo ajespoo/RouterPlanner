@@ -10,6 +10,20 @@ KEY COMPONENTS:
 - Error handling for external API failures
 - Context manager for proper resource cleanup
 
+
+class DigitransitClient:
+    async def find_stops(self, query: str) -> List[Stop]:
+        # GraphQL query to find stops by name
+        
+    async def plan_route(self, from_stop: str, to_stop: str, arrival_time: datetime) -> List[Route]:
+        # Complex GraphQL query for route planning
+        # Handles arrival time constraints
+        
+    def _parse_itinerary(self, itinerary: Dict) -> Optional[Route]:
+        # Converts GraphQL response to Pydantic models
+```
+
+
 CODE STRUCTURE:
 1. DigitransitClient class with async context manager
 2. find_stops() - GraphQL query to search stops by name

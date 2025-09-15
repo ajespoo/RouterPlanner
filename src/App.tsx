@@ -2,7 +2,25 @@ import React, { useState } from 'react';
 import { MapPin, Clock, Route, Search, AlertCircle, CheckCircle } from 'lucide-react';
 
 /*
-PURPOSE: React frontend interface for the Transport Routing API
+PURPOSE: React frontend interface interactive web interface for the Transport Routing API
+**Key Components**:
+```tsx
+const [routes, setRoutes] = useState<Route[]>([]);
+const [loading, setLoading] = useState(false);
+
+const searchRoutes = async () => {
+    // API call with error handling
+    const mockResponse: RouteResponse = { /* demo data */ };
+    setRoutes(mockResponse.routes);
+};
+
+return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        {/* Search form and results display */}
+    </div>
+);
+
+
 
 KEY COMPONENTS:
 - Interactive search form with validation

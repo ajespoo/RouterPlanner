@@ -4,10 +4,18 @@ CDK App entry point for Transport Routing API
 
 PURPOSE: Main CDK application that defines the deployment configuration
 
+
 KEY COMPONENTS:
 - CDK App instantiation
 - Stack creation with environment configuration
 - CloudFormation template synthesis
+
+**Key Components**:
+
+app = cdk.App()
+TransportRoutingStack(app, "TransportRoutingStack", 
+    env=cdk.Environment(region="eu-west-1"))
+app.synth()
 
 CODE STRUCTURE:
 1. Import CDK core and stack modules

@@ -1,6 +1,8 @@
 """
 Data models for the Transport Routing API
 
+Data Models and Validation
+
 PURPOSE: Pydantic models for request/response validation and serialization
 
 KEY COMPONENTS:
@@ -23,6 +25,23 @@ WHY USED:
 - Automatic OpenAPI schema generation
 - JSON serialization with field aliases
 - Runtime data validation prevents invalid data processing
+
+**Key Components**:
+
+class RouteQuery(BaseModel):
+    arrival_time: str = Field(..., description="yyyyMMddHHmmss format")
+    @validator('arrival_time')
+    def validate_arrival_time(cls, v):
+        # Custom validation for time format
+
+class RouteLeg(BaseModel):
+    mode: str  # Transport mode (BUS, TRAIN, etc.)
+    from_stop: str = Field(..., alias="from")  # Field aliases for JSON
+    
+class RouteResponse(BaseModel):
+    routes: List[Route]
+    query: dict
+
 """
 from datetime import datetime
 from typing import List, Optional

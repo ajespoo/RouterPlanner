@@ -12,6 +12,34 @@ KEY COMPONENTS:
 - Secrets Manager for API key management (placeholder)
 - S3 + CloudFront for documentation hosting
 
+**Key Components**:
+
+# Lambda function with proper configuration
+lambda_function = _lambda.Function(
+    runtime=_lambda.Runtime.PYTHON_3_11,
+    timeout=Duration.seconds(30),
+    environment={"DIGITRANSIT_API_URL": "...", "SECRETS_ARN": "..."}
+)
+
+# API Gateway with CORS
+api = apigateway.RestApi(
+    default_cors_preflight_options=apigateway.CorsOptions(
+        allow_origins=apigateway.Cors.ALL_ORIGINS
+    )
+)
+
+# CloudWatch Dashboard
+dashboard = cloudwatch.Dashboard(
+    widgets=[GraphWidget(title="API Requests", left=[route_requests_metric])]
+)
+
+# ElastiCache Redis Cluster
+redis_cluster = elasticache.CfnCacheCluster(
+    cache_node_type="cache.t3.micro",
+    engine="redis"
+)
+
+
 CODE STRUCTURE:
 1. VPC and networking setup
 2. ElastiCache Redis cluster configuration
