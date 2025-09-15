@@ -1,3 +1,6 @@
+ # configuration file sets up ESLint, a popular JavaScript linter, to check for errors and 
+ # enforce coding standards in a React project that uses TypeScript. It uses a modern flat configuration format.
+
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
