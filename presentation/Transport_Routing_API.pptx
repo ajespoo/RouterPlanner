@@ -1,0 +1,133 @@
+# Transport Routing API Presentation
+
+## Note: PowerPoint File Placeholder
+##
+## PURPOSE: Professional presentation for stakeholders and technical audiences
+##
+## KEY COMPONENTS:
+## - Problem statement and solution overview
+## - Architecture diagrams and technology stack
+## - Implementation details and code examples
+## - Deployment process and monitoring setup
+## - Demo scenarios and future enhancements
+##
+## STRUCTURE:
+## 1. Title slide with project branding
+## 2. Problem statement (Andrea's requirements)
+## 3. Solution architecture and design decisions
+## 4. Technology stack and implementation approach
+## 5. AWS infrastructure and deployment strategy
+## 6. Testing strategy and quality assurance
+## 7. Monitoring and observability features
+## 8. Live demonstration and API examples
+## 9. Future enhancements and scalability
+## 10. Questions and technical discussion
+##
+## WHY USED:
+## - Stakeholder communication and buy-in
+## - Technical overview for non-developers
+## - Project demonstration and showcase
+## - Documentation of design decisions
+## - Training material for team members
+
+This file represents a PowerPoint presentation for the Transport Routing API project.
+
+### Slide Structure:
+
+**Slide 1: Title Slide**
+- Transport Routing REST API
+- Helsinki Public Transport Route Planning
+- For Andrea's Daily Commute Solution
+
+**Slide 2: Problem Statement**
+- Andrea needs to know departure times from Aalto Yliopisto to Keilaniemi
+- Must arrive at KONE Building by 08:45 on weekdays
+- Requires automated email notifications by 06:00
+- Needs REST API (not familiar with GraphQL)
+
+**Slide 3: Solution Overview**
+- REST API wrapper around Helsinki Digitransit GraphQL API
+- AWS Lambda + API Gateway deployment
+- FastAPI framework with Pydantic validation
+- Comprehensive error handling and logging
+
+**Slide 4: Architecture Diagram**
+- Client Request → API Gateway → Lambda Function → Digitransit API
+- CloudWatch for logging and monitoring
+- S3 + CloudFront for documentation
+- Secrets Manager for API keys
+- ElastiCache for performance optimization
+
+**Slide 5: API Endpoints**
+- GET /routes - Main route planning endpoint
+- GET /health - Health check endpoint
+- GET /docs - Interactive API documentation
+- Parameters: arrival_time, start_stop, end_stop
+
+**Slide 6: Key Features**
+- ✅ REST API with OpenAPI documentation
+- ✅ AWS CDK Infrastructure as Code
+- ✅ Comprehensive test coverage (unit + integration)
+- ✅ CloudWatch logging and metrics
+- ✅ Production-ready error handling
+- ✅ CORS enabled for web applications
+
+**Slide 7: Technology Stack**
+- Backend: Python 3.11, FastAPI, Pydantic
+- Infrastructure: AWS CDK, Lambda, API Gateway
+- Testing: pytest, pytest-cov, pytest-asyncio
+- Monitoring: CloudWatch, AWS PowerTools
+- Documentation: OpenAPI/Swagger
+
+**Slide 8: Testing Strategy**
+- Unit Tests: Models, client, handlers
+- Integration Tests: End-to-end API workflows
+- Performance Tests: Concurrent request handling
+- Validation Tests: Edge cases and error scenarios
+
+**Slide 9: Deployment Process**
+- CDK Bootstrap (one-time setup)
+- CDK Deploy (automated infrastructure)
+- CloudFormation stack creation
+- API Gateway endpoint provisioning
+- Lambda function deployment
+
+**Slide 10: Monitoring & Observability**
+- CloudWatch Logs for debugging
+- Custom metrics for API usage
+- Health check endpoints
+- Error tracking and alerting
+- Performance monitoring
+
+**Slide 11: Future Enhancements**
+- ElastiCache for response caching
+- Secrets Manager for API key rotation
+- CloudFront + S3 for documentation hosting
+- Rate limiting and throttling
+- Multi-region deployment
+
+**Slide 12: Demo**
+- Live API demonstration
+- Sample request/response
+- API documentation interface
+- CloudWatch logs and metrics
+
+**Slide 13: Questions & Discussion**
+- Technical implementation details
+- Scalability considerations
+- Security best practices
+- Maintenance and operations
+
+---
+
+**To create the actual PowerPoint file:**
+1. Use the content above as slide structure
+2. Add visual diagrams for architecture
+3. Include code snippets and examples
+4. Add screenshots of API documentation
+5. Include performance metrics and charts
+
+**File Location:** `/presentation/Transport_Routing_API.pptx`
+**Format:** Microsoft PowerPoint (.pptx)
+**Slides:** 13 slides total
+**Duration:** 15-20 minutes presentation

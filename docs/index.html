@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Routing API Documentation</title>
+    <!--
+    PURPOSE: Professional HTML documentation for the Transport Routing API
+    
+    KEY COMPONENTS:
+    - Comprehensive API endpoint documentation
+    - Interactive examples and code snippets
+    - Architecture overview and deployment guide
+    - Professional styling with CSS
+    - Monitoring and observability information
+    
+    CODE STRUCTURE:
+    1. HTML structure with semantic sections
+    2. CSS styling for professional appearance
+    3. API endpoint documentation with examples
+    4. Code snippets and cURL examples
+    5. Architecture diagrams and deployment info
+    
+    WHY USED:
+    - Professional documentation presentation
+    - Hosted on CloudFront for fast global access
+    - Comprehensive API reference for developers
+    - Visual examples and interactive content
+    - Stakeholder-friendly technical documentation
+    -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        .endpoint {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .method {
+            background: #28a745;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .code {
+            background: #f1f3f4;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .parameter {
+            background: #e9ecef;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 3px;
+        }
+        .parameter strong {
+            color: #667eea;
+        }
+        .nav {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 2rem;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .status-warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚌 Transport Routing API</h1>
+        <p>Helsinki Public Transport Route Planning Service</p>
+        <p>REST API for Andrea's Daily Commute Solution</p>
+    </div>
+
+    <div class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#endpoints">API Endpoints</a>
+        <a href="#examples">Examples</a>
+        <a href="#deployment">Deployment</a>
+        <a href="#monitoring">Monitoring</a>
+    </div>
+
+    <div class="section" id="overview">
+        <h2>📋 Overview</h2>
+        <p>The Transport Routing API provides a REST interface to Helsinki's public transport system, helping users plan their journeys with specific arrival time constraints.</p>
+        
+        <h3>Key Features</h3>
+        <ul>
+            <li>🎯 <strong>Arrival Time Planning</strong> - Find routes that arrive by a specific time</li>
+            <li>🚌 <strong>Multi-Modal Transport</strong> - Bus, train, tram, subway, and walking routes</li>
+            <li>📊 <strong>Real-time Data</strong> - Integration with Helsinki Digitransit API</li>
+            <li>🔒 <strong>Production Ready</strong> - Comprehensive error handling and monitoring</li>
+            <li>📖 <strong>OpenAPI Documentation</strong> - Interactive API documentation</li>
+        </ul>
+
+        <h3>Architecture</h3>
+        <div class="code">
+Client → API Gateway → Lambda Function → Digitransit GraphQL API
+                ↓
+        CloudWatch Logs & Metrics
+                ↓
+        S3 + CloudFront (Documentation)
+                ↓
+        ElastiCache (Caching) + Secrets Manager (API Keys)
+        </div>
+    </div>
+
+    <div class="section" id="endpoints">
+        <h2>🔗 API Endpoints</h2>
+
+        <div class="endpoint">
+            <h3><span class="method">GET</span> /routes</h3>
+            <p>Get transport routes between two stops with arrival time constraint.</p>
+            
+            <h4>Parameters</h4>
+            <div class="parameter">
+                <strong>arrival_time</strong> (required) - Target arrival time in <code>yyyyMMddHHmmss</code> format
+                <br><em>Example: 20241201084500</em>
+            </div>
+            <div class="parameter">
+                <strong>start_stop</strong> (required) - Name of the departure stop
+                <br><em>Example: Aalto Yliopisto</em>
+            </div>
+            <div class="parameter">
+                <strong>end_stop</strong> (required) - Name of the destination stop
+                <br><em>Example: Keilaniemi</em>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method">GET</span> /health</h3>
+            <p>Detailed health check including external service status.</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method">GET</span> /metrics</h3>
+            <p>API usage metrics and performance statistics.</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method">GET</span> /docs</h3>
+            <p>Interactive OpenAPI/Swagger documentation.</p>
+        </div>
+    </div>
+
+    <div class="section" id="examples">
+        <h2>💡 Examples</h2>
+
+        <h3>Basic Route Query</h3>
+        <div class="code">
+GET /routes?arrival_time=20241201084500&start_stop=Aalto%20Yliopisto&end_stop=Keilaniemi
+
+Response:
+{
+  "routes": [
+    {
+      "departure_time": "08:20:00",
+      "arrival_time": "08:42:00",
+      "duration": 1320,
+      "legs": [
+        {
+          "mode": "BUS",
+          "route": "550",
+          "from": "Aalto Yliopisto",
+          "to": "Keilaniemi",
+          "departure": "08:20:00",
+          "arrival": "08:42:00",
+          "duration": 1320
+        }
+      ]
+    }
+  ],
+  "query": {
+    "from": "Aalto Yliopisto",
+    "to": "Keilaniemi",
+    "arrival_time": "20241201084500"
+  }
+}
+        </div>
+
+        <h3>Health Check</h3>
+        <div class="code">
+GET /health
+
+Response:
+{
+  "service": "Transport Routing API",
+  "status": "healthy",
+  "components": {
+    "digitransit_api": "healthy",
+    "redis_cache": "healthy",
+    "secrets_manager": "healthy"
+  },
+  "timestamp": "2024-12-01T08:45:00.000Z"
+}
+        </div>
+
+        <h3>cURL Examples</h3>
+        <div class="code">
+# Basic route query
+curl "https://api.example.com/routes?arrival_time=20241201084500&start_stop=Aalto%20Yliopisto&end_stop=Keilaniemi"
+
+# Health check
+curl "https://api.example.com/health"
+
+# Get metrics
+curl "https://api.example.com/metrics"
+        </div>
+    </div>
+
+    <div class="section" id="deployment">
+        <h2>🚀 Deployment</h2>
+
+        <h3>AWS Infrastructure</h3>
+        <ul>
+            <li><strong>AWS Lambda</strong> - Serverless compute for API logic</li>
+            <li><strong>API Gateway</strong> - REST API endpoint with CORS</li>
+            <li><strong>CloudWatch</strong> - Logging and monitoring</li>
+            <li><strong>S3 + CloudFront</strong> - Documentation hosting</li>
+            <li><strong>ElastiCache</strong> - Redis caching layer</li>
+            <li><strong>Secrets Manager</strong> - API key management</li>
+        </ul>
+
+        <h3>Deployment Steps</h3>
+        <div class="code">
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Bootstrap CDK (first time only)
+cdk bootstrap
+
+# 3. Deploy infrastructure
+cdk deploy
+
+# 4. Test deployment
+curl "https://YOUR-API-URL/health"
+        </div>
+
+        <h3>Environment Variables</h3>
+        <div class="parameter">
+            <strong>DIGITRANSIT_API_URL</strong> - Helsinki Digitransit GraphQL endpoint
+        </div>
+        <div class="parameter">
+            <strong>SECRETS_ARN</strong> - AWS Secrets Manager ARN for API keys
+        </div>
+        <div class="parameter">
+            <strong>REDIS_ENDPOINT</strong> - ElastiCache Redis endpoint
+        </div>
+    </div>
+
+    <div class="section" id="monitoring">
+        <h2>📊 Monitoring & Observability</h2>
+
+        <h3>CloudWatch Metrics</h3>
+        <ul>
+            <li><span class="status-badge status-success">RouteRequests</span> - Total API requests</li>
+            <li><span class="status-badge status-warning">ErrorRate</span> - Percentage of failed requests</li>
+            <li><span class="status-badge status-success">ResponseTime</span> - Average response time</li>
+            <li><span class="status-badge status-success">CacheHitRate</span> - Redis cache efficiency</li>
+        </ul>
+
+        <h3>Logging</h3>
+        <p>Structured logging with AWS PowerTools provides:</p>
+        <ul>
+            <li>Request/response correlation IDs</li>
+            <li>Performance timing</li>
+            <li>Error stack traces</li>
+            <li>Custom business metrics</li>
+        </ul>
+
+        <h3>Alerting</h3>
+        <ul>
+            <li>High error rate (>5% over 2 evaluation periods)</li>
+            <li>Lambda function timeouts</li>
+            <li>External API connectivity issues</li>
+            <li>Cache performance degradation</li>
+        </ul>
+
+        <h3>Dashboard</h3>
+        <p>Custom CloudWatch dashboard includes:</p>
+        <ul>
+            <li>API request volume and trends</li>
+            <li>Error rates and types</li>
+            <li>Lambda performance metrics</li>
+            <li>External service health</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Development</h2>
+
+        <h3>Local Development</h3>
+        <div class="code">
+# Run local server
+python local_server.py
+
+# Run tests
+python run_tests.py
+
+# API available at: http://localhost:8000
+# Documentation at: http://localhost:8000/docs
+        </div>
+
+        <h3>Testing</h3>
+        <ul>
+            <li><strong>Unit Tests</strong> - Models, client, handlers</li>
+            <li><strong>Integration Tests</strong> - End-to-end workflows</li>
+            <li><strong>Performance Tests</strong> - Concurrent request handling</li>
+            <li><strong>Validation Tests</strong> - Edge cases and error scenarios</li>
+        </ul>
+
+        <h3>Code Quality</h3>
+        <ul>
+            <li>Type hints with Pydantic models</li>
+            <li>Comprehensive error handling</li>
+            <li>AWS PowerTools integration</li>
+            <li>OpenAPI/Swagger documentation</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📞 Support</h2>
+        <p>For technical support or questions about the Transport Routing API:</p>
+        <ul>
+            <li>Check CloudWatch logs for error details</li>
+            <li>Verify API Gateway configuration</li>
+            <li>Test Lambda function directly</li>
+            <li>Review IAM permissions</li>
+        </ul>
+        
+        <p><strong>API Version:</strong> 1.0.0</p>
+        <p><strong>Last Updated:</strong> December 2024</p>
+    </div>
+</body>
+</html>

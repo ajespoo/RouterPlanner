@@ -1,0 +1,21 @@
+/*
+PURPOSE: TypeScript configuration for the project
+
+KEY COMPONENTS:
+- Compiler options for type checking
+- Module resolution settings
+- Build target configuration
+
+WHY USED:
+- Type safety for React components
+- Modern JavaScript features
+- Better IDE support and error detection
+*/
+
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
